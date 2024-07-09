@@ -71,7 +71,21 @@ We are currently using a "window" algorithm to maintain context, which is not th
 In your forked repositories, create a `submission.md` file and detail the following in the same order : 
 
 1) Your understanding of the codebase. (very brief, just covering a general view. This is given in our `README.md` file, but we want to know your understanding)
-2) Write about all the processes involved from a Machine Learning standpoint. We have used several novel techniques, so it would be great if you can identify those and explain them. (**HINT** : One of these techniques is with the embedding algorithm [here](https://github.com/IRISLabsRecs2024/reDocs.ai/blob/main/server/app/logic/create_embeddings.py))
+
+2) Write about all the processes involved from a Machine Learning standpoint using the template given below. We have used several novel techniques, so it would be great if you can identify those and explain them. (**HINT** : One of these techniques is with the embedding algorithm [here](https://github.com/IRISLabsRecs2024/reDocs.ai/blob/main/server/app/logic/create_embeddings.py))
+
+You can fill in the following pointers in your file for this point : 
+
+- Codebase Traversal : 
+
+- Code Embeddings : 
+
+- Handling Large Code Files :
+
+- Maintaining Context with Agglomerating Clustering : 
+
+- Efficient Documentation Generation : 
+
 3) The tasks you have tackled. Give a description of what you have done, why you chose to use some specific method, what other methods exist and why you didn't use them.
 4) Write about the limitations of the current application, and what core changes you can make. (Core changes as in if you want to change the architecture of how this entire process goes about)
 
