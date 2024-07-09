@@ -13,15 +13,15 @@ To power our documentation generation, we leverage the capabilities of GPT-3.5. 
 
 ### A Step-by-Step Approach
 
-1. **Codebase Traversal**: The process begins by traversing the codebase in a tree-wise fashion to access its contents.
+1. **Codebase Traversal**
 
-2. **Code Embeddings with CodeBERT**: To extract meaningful information from the code, we employ Microsoft's CodeBERT for code embeddings. However, we encountered an issue with large code files that CodeBERT cannot handle effectively.
+2. **Code Embeddings**
 
-3. **Handling Large Code Files**: To overcome the limitations of CodeBERT for large code files, we devised our own algorithm to create tokenizers in a window-like manner. By specifying a window size and an overlap "region," we maintain essential context and generate embeddings by averaging the embeddings produced for each window.
+3. **Handling Large Code Files** 
 
-4. **Maintaining Context with Agglomerating Clustering**: To ensure context preservation across the codebase, we use Agglomerative Clustering. This technique groups "similar" code files with shared semantic meanings and features, enhancing the quality of the generated documentation. We choose this type of clustering to exploit the hierarchical relations in the clusters formed.
+4. **Maintaining Context with Agglomerating Clustering**
 
-5. **Efficient Documentation Generation**: After clustering, we concatenate the code files belonging to the same cluster. The resulting concatenated code is then sent to GPT-3.5 using efficient prompt engineering techniques. The generated documentation provides comprehensive insights into the codebase.
+5. **Efficient Documentation Generation**
 
 ### Code Refactoring Ability
 We harness the power of the LLM to perform code refactoring, with our complex prompt to change the given code block to a neater, efficient and structurally sound code output. We focus on the cleanliness in the prompting along with considering various code analytics to get the best output.
