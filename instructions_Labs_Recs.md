@@ -34,7 +34,7 @@ This will help you understand the issues below better.
 
 ### Dendrogram Feature Addition
 
-Based on the current clustering algorithm used, contributors can add this functionality. You can look into dendrograms here. This is a very easy issue to fix.
+Based on the current clustering algorithm used, contributors can add this functionality. You can look into dendrograms [here](https://www.statisticshowto.com/hierarchical-clustering/). This is a very easy issue to fix.
 
 ### Documentation Customization
 
@@ -66,4 +66,17 @@ We are currently using CodeBERT, which has its own limitations. Contributors can
 
 We are currently using a "window" algorithm to maintain context, which is not the most efficient technique. Contributors can look into memory networks, various attention mechanisms, or Reinforcement Learning with Memory.
 
+# Submission Instructions
 
+In your forked repositories, create a `submission.md` file and detail the following in the same order : 
+
+1) Your understanding of the codebase. (very brief, just covering a general view. This is given in our `README.md` file, but we want to know your understanding)
+2) Write about all the processes involved from a Machine Learning standpoint. We have used several novel techniques, so it would be great if you can identify those and explain them. (HINT : Look at the embedding algorithm)
+3) The tasks you have tackled. Give a description of what you have done, why you chose to use some specific method, what other methods exist and why you didn't use them.
+4) Write about the limitations of the current application, and what core changes you can make. (Core changes as in if you want to change the architecture of how this entire process goes about)
+
+## Evaluation Guidelines
+
+We are not focussed on the number of tasks you can manage. These tasks are just a small guide to what can be fixed. We are more interested in the clarity of the concepts pertaining to Natural Language Processing and Machine Learning in general. Even if you cannot solve any tasks, if you can detail points 1 and 2 in the [Submission Instructions](#submission-instructions) really well, you will have a strong submission. Solving fewer tasks which are done well will always be better than solving more tasks which are done haphazardly. The goal is to test out how well you can translate ML and NLP theory into application.
+
+   
