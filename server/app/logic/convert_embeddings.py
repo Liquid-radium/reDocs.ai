@@ -53,4 +53,11 @@ def clustering(list1):
         indices_list.append(indices)
     #for i in range(len(indices_list)):
         #print("Bro i called clustering: ",list(indices_list[i]))
+    Z = hierarchy.linkage(list1, method='complete', metric='cosine') 
+    plt.figure(figsize=(10, 6))
+    hierarchy.dendrogram(Z)
+    plt.title('Dendrogram')
+    plt.xlabel('Data points')
+    plt.ylabel('Distance')
+    plt.show()
     return indices_list
