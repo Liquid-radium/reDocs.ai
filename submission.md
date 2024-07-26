@@ -49,5 +49,6 @@
        - another function is written which generates the documentation using system and user prompts, having a maximum response length of 2000 tokens.
 
 3. Tasks handled: 
-
+  1. Dendrogram feature addition:
+     - 
   
