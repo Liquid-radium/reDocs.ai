@@ -50,5 +50,27 @@
 
 3. Tasks handled: 
   1. Dendrogram feature addition:
-     - 
-  
+     - the linkage method from the heirarchy class was called to generate the dendrogram
+     - the parameters passed were the list itself used for clustering, the metric of closeness, which was cosine as used in other areas of the codebase (during embeddings)
+     - matplotlib was the library used for plotting the dendrogram and the plt.show() method was used for displaying the dendrogram
+     - this functionality was added within the function clustering itself so that the dendrogram can be displayed along with the clustering done later when the function is called in the file file_traversal.py
+     - the seaborn library could also be used for the purpose of plotting the dendrograms in this case
+     - either method could be used for plotting with no advantage over the other
+   2. Additional Code Features:
+      - code optimisation is the feature added to the codebase for suggesting improvements in the codebase
+      - it can also be used for reasons similar to code refactoring (used for enhancing code by retaining most important aspects)
+      - this is done using a similar process to adding code refactoring and generating tests for the codebase
+      - system prompts and user prompts are given based on the task needed to be performed (in this case code optimization) and the call_openai_api function is called to perform the optimisation task
+      - the call_openai_api function makes use of gpt turbo 3.5 model which makes use of tranformer mechanism to carry out this function, the output is stored in a file 
+      - the function is routed at the backend and is also represented in the frontend 
+ 3. Investigating clustering mechanisms:
+    - The DBSCAN clustering algorithm was used for clustering the embeddings
+    - it is an algorithm that works best for high density variations in the data and also for large amount of data
+    - DBSCAN does probablistic assignment of datapoints in clusters and is better at detecing outliers as compared to other algorithms
+    - it also has the advantage of not needing to mention the number of clusters earlier, which was a hyperparameter in the agglomerative clustering mechanism
+    - a function is written to perform the DBSCAN clustering which takes in two hyperparameters, namely epsilon and minimum number of samples
+    - the best parameters for this function by performing hyperparameter tuning and the metric for evalutation of the clusters is silhouette score
+    - the best value search of epsilon is done in the range of 10 to 50 with the step size of 5, which is ideal for datasets in which the embeddings have not been normalized
+    - the best value search of minimum number of samples is done in the range of 10 to 50 because of a larger dataset with varying densities
+    - other methods which could be used in this case were KMeans clustering, which is centroid based clustering and does hard assignment and doesn't detect outliers very accurately
+    - thus, it was not considered as an alternative algorithm to be used  
