@@ -180,10 +180,10 @@ async def optimize(file: UploadFile = File(...)):
         ask_gpt_to_optimize_code(prompt_text, optimized_folder)
 
     
-        optimized_file_path = f"{optimized_folder}/optimized_code.txt"
+        optimized_file_path = f"{optimized_folder}/output.txt"
 
 
-        return FileResponse(optimized_file_path, filename="optimized_code.txt")
+        return FileResponse(optimized_file_path, filename="output.txt")
 
     except Exception as e:
         raise Exception(f"An error occurred: {e}")
