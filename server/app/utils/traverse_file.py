@@ -89,7 +89,7 @@ def bfs_traversal(root_dir):
 
     print(reshaped_embeddings_list)
 
-    indices_list = clustering(reshaped_embeddings_list)
+    indices_list = clustering1(reshaped_embeddings_list)
 
     print(indices_list)
 
