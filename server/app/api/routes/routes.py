@@ -153,3 +153,37 @@ async def refactor(file: UploadFile = File(...)):
 
     except Exception as e:
         raise Exception(f"{e}")
+
+@router.post("/optimize")
+async def optimize(file: UploadFile = File(...)):
+    try:
+        
+        optimize_uploads_folder = "optimize_uploads"
+        optimized_folder = "optimized_code"
+
+    
+        delete_folder_if_exists(optimize_uploads_folder)
+        delete_folder_if_exists(optimized_folder)
+        create_folder_if_not_exists(optimize_uploads_folder)
+        create_folder_if_not_exists(optimized_folder)
+
+
+        file_path = f'{optimize_uploads_folder}/{file.filename}'
+        with open(file_path, 'wb') as f:
+            while chunk := await file.read(1024):
+                f.write(chunk)
+
+        
+        prompt_text = read_file(file_path)
+
+    
+        ask_gpt_to_optimize_code(prompt_text, optimized_folder)
+
+    
+        optimized_file_path = f"{optimized_folder}/optimized_code.txt"
+
+
+        return FileResponse(optimized_file_path, filename="optimized_code.txt")
+
+    except Exception as e:
+        raise Exception(f"An error occurred: {e}")
