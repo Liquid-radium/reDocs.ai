@@ -35,7 +35,7 @@ const rejectStyle = {
     borderColor: '#ff1744'
 };
 
-export default function Refactor(props) {
+export default function Optimize(props) {
 
     const [code, setCode] = useState("")
     const [loading, setLoading] = useState(false)
