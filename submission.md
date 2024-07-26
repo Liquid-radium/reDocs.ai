@@ -48,6 +48,6 @@
        - test generation and evaluation allows to understand the shortcomings of the model and provides a method of evaluation of the model
        - another function is written which generates the documentation using system and user prompts, having a maximum response length of 2000 tokens.
 
-3. Tasks handled:
+3. Tasks handled: 
 
   
