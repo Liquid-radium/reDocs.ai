@@ -1,7 +1,7 @@
 from sklearn.cluster import DBSCAN
 import numpy as np
 
-def clustering(list1):
+def clustering1(list1):
     # Convert list1 to a numpy array if it's not already
     X = np.array(list1)
     
