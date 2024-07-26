@@ -111,6 +111,24 @@ def ask_gpt_to_refactor_code(prompt_text, output_folder):
         print(response)
         save_to_file(response, output_file)
 
+def ask_gpt_to_optimize_code(prompt_text, output_folder):
+    system_prompt = """You are a skilled software engineer specializing in code optimization and performance improvements."""
+
+    user_prompt = """Analyze the following code for performance bottlenecks and suggest optimizations to improve its efficiency. Provide only the optimized code and avoid any additional explanations or comments."""
+    
+    output_file = f'{output_folder}/optimized_code.txt'
+
+    print(SHOULD_MOCK_AI_RESPONSE)
+
+    if SHOULD_MOCK_AI_RESPONSE == 'True':
+        print("Mocking AI response")
+        mock_chunks_gpt(prompt_text, output_file)
+    elif SHOULD_MOCK_AI_RESPONSE == 'False':
+        print("Calling OpenAI API")
+        response = call_openai_api(prompt_text, system_prompt, user_prompt)
+        print(response)
+        save_to_file(response, output_file)
+
 # -----DEPRECATED CODE-----
 
 # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
