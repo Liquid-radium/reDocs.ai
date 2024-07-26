@@ -12,7 +12,7 @@ from utils.create_folder import create_folder_if_not_exists, delete_folder_if_ex
 
 from utils.read_file import read_file
 
-from logic.infinite_gpt import ask_gpt_to_generate_tests, ask_gpt_to_refactor_code
+from logic.infinite_gpt import ask_gpt_to_generate_tests, ask_gpt_to_refactor_code, ask_gpt_to_optimize_code
 
 router = APIRouter()
 
