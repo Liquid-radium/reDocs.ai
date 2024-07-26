@@ -35,8 +35,4 @@ def clustering1(list1):
         indices = np.where(arr == val)[0]
         indices_list.append(indices)
     
-    # For debugging or inspection
-    # for i in range(len(indices_list)):
-    #     print("Cluster {}: {}".format(i, list(indices_list[i])))
-    
     return indices_list
