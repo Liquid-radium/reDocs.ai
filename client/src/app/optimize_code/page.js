@@ -161,7 +161,7 @@ export default function Refactor(props) {
                                 <ZipFileViewer zipFile={zipFile} />
                             </div> */}
                             <Editor
-                                defaultValue="// refactored code appear here"
+                                defaultValue="// optimized code appear here"
                                 onChange={handleEditorChange}
                                 theme="vs-dark"
                                 width="60vw"
