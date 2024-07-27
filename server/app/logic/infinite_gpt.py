@@ -133,15 +133,32 @@ def ask_gpt_to_optimize_code(prompt_text, output_folder):
 
 # @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
 def call_openai_api_higher_tokens(text, output_file):
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-16k",
-        messages=[
-            {"role": "system", "content": "You are a smart technical writer who understands code and can write documentation for it."},
-            {"role": "user", "content": f"Give me a developers documentation of the following code. Give a brief intro, table of contents, function explanations, dependencies, API specs (if present), schema tables in markdown. Give in markdown format and try to strict to the headings\n\n: {text}."},
-        ],
-        max_tokens=2000,
-        n=1,
-        stop=None,
-        temperature=0.5,
-    )
+    def generate_text(messages):
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo-16k",
+            messages=messages,
+            max_tokens=2000,
+            n=1,
+            stop=None,
+            temperature=0.5,
+        )
+        return response.choices[0].message['content']
+
+    messages = [
+        {"role": "system", "content": "You are a smart technical writer who understands code and can write documentation for it."},
+        {"role": "user", "content": f"Give me a developers documentation of the following code. Give a brief intro, table of contents, function explanations, dependencies, API specs (if present), schema tables in markdown. Give in markdown format and try to strict to the headings\n\n: {text}."},
+    ]
+
+    while True:
+        response = generate_text(messages)
+        print(response)
+
+        feedback = input("Is there any more customisation you would like to add? (yes/no): ")
+        if feedback.lower() == "yes":
+            break
+        else:
+            refinement = input("How can I customise your documentation? ")
+            messages[1]["content"] += " " + refinement
+
     save_to_file(response, output_file)
+
