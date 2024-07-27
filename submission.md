@@ -64,8 +64,11 @@
       - system prompts and user prompts are given based on the task needed to be performed (in this case code optimization) and the call_openai_api function is called to perform the optimisation task
       - the call_openai_api function makes use of gpt turbo 3.5 model which makes use of tranformer mechanism to carry out this function, the output is stored in a file 
       - the function is routed at the backend and is also represented in the frontend
-      - another way to add this functionality would be to mention it in the user prompt of the code refactoring function and increase the number of tokens of the response   
- 3. Investigating clustering mechanisms:
+      - another way to add this functionality would be to mention it in the user prompt of the code refactoring function and increase the number of tokens of the response
+ 3. Document customisation:
+   - Iterative prompting is used for performing this task
+   - the user prompt and system prompt is given to 
+ 4. Investigating clustering mechanisms:
     - The DBSCAN clustering algorithm was used for clustering the embeddings
     - it is an algorithm that works best for high density variations in the data and also for large amount of data
     - DBSCAN does probablistic assignment of datapoints in clusters and is better at detecing outliers as compared to other algorithms
@@ -80,5 +83,4 @@
     - specifying the number fo clusters
     - senstivity to outliers
     - assumes all clusters to be spherical
-    - 
     - thus, it was not considered as an alternative algorithm to be used  
