@@ -6,8 +6,9 @@
    2. reads the file and traverses it using the breadth first search algorithm, and processing of files takes place using the BERT model and tokenizer
    3. embeddings are created during traversal and clustering is performed upon these embeddings
    4. GPT is used to generate tests and documentation and mocking mechansim is used for the process
-   5. routers are used for endpoint connections
-   The client folder contains the code to implement these functions in the front end and display the code documentation
+   5. Document generation takes place using GPT 3.5 model and makes use of a system prompt and user prompt to do the same, similar to how code refactoring and test generation is done.
+   6. routers are used for endpoint connections
+   The client folder contains the code to implement these functions in the front end and display the end result 
 
 2. Explaining the machine learning aspects of algorithms used:
    1. Codebase traversal:
@@ -62,15 +63,22 @@
       - this is done using a similar process to adding code refactoring and generating tests for the codebase
       - system prompts and user prompts are given based on the task needed to be performed (in this case code optimization) and the call_openai_api function is called to perform the optimisation task
       - the call_openai_api function makes use of gpt turbo 3.5 model which makes use of tranformer mechanism to carry out this function, the output is stored in a file 
-      - the function is routed at the backend and is also represented in the frontend 
+      - the function is routed at the backend and is also represented in the frontend
+      - another way to add this functionality would be to mention it in the user prompt of the code refactoring function and increase the number of tokens of the response   
  3. Investigating clustering mechanisms:
     - The DBSCAN clustering algorithm was used for clustering the embeddings
     - it is an algorithm that works best for high density variations in the data and also for large amount of data
     - DBSCAN does probablistic assignment of datapoints in clusters and is better at detecing outliers as compared to other algorithms
     - it also has the advantage of not needing to mention the number of clusters earlier, which was a hyperparameter in the agglomerative clustering mechanism
     - a function is written to perform the DBSCAN clustering which takes in two hyperparameters, namely epsilon and minimum number of samples
+    - epsilon is the distance from the centre of the cluster which takes in other points to be made a part of the cluster, whereas the minimum sample represents the minimum number of points needed to make a cluster in the algorithm
     - the best parameters for this function by performing hyperparameter tuning and the metric for evalutation of the clusters is silhouette score
     - the best value search of epsilon is done in the range of 10 to 50 with the step size of 5, which is ideal for datasets in which the embeddings have not been normalized
     - the best value search of minimum number of samples is done in the range of 10 to 50 because of a larger dataset with varying densities
-    - other methods which could be used in this case were KMeans clustering, which is centroid based clustering and does hard assignment and doesn't detect outliers very accurately
+    - other methods which could be used in this case were KMeans clustering, but it wasn't used due to the following disadvantages:
+    - sensitivity to centroid
+    - specifying the number fo clusters
+    - senstivity to outliers
+    - assumes all clusters to be spherical
+    - 
     - thus, it was not considered as an alternative algorithm to be used  
