@@ -59,12 +59,19 @@
      - either method could be used for plotting with no advantage over the other
      - the code is written in the file convert_embeddings.py:
      - Z = hierarchy.linkage(list1, method='complete', metric='cosine')
+     - 
        plt.figure(figsize=(10, 6))
+       
        hierarchy.dendrogram(Z)
+       
        plt.title('Dendrogram')
+       
        plt.xlabel('Data points')
+       
        plt.ylabel('Distance')
+       
        plt.show()
+       
    2. Additional Code Features:
       - code optimisation is the feature added to the codebase for suggesting improvements in the codebase
       - it can also be used for reasons similar to code refactoring (used for enhancing code by retaining most important aspects)
@@ -77,6 +84,7 @@
      
       - 
          def ask_gpt_to_optimize_code(prompt_text, output_folder):
+        
        system_prompt = """You are a skilled software engineer specializing in code optimization and performance improvements."""
    
        user_prompt = """Analyze the following code for performance bottlenecks and suggest optimizations to improve its efficiency. Provide only the optimized code and avoid any additional explanations or comments."""
@@ -86,16 +94,24 @@
        print(SHOULD_MOCK_AI_RESPONSE)
    
        if SHOULD_MOCK_AI_RESPONSE == 'True':
+      
            print("Mocking AI response")
+      
            mock_chunks_gpt(prompt_text, output_file)
+      
        elif SHOULD_MOCK_AI_RESPONSE == 'False':
+      
            print("Calling OpenAI API")
+      
            response = call_openai_api(prompt_text, system_prompt, user_prompt)
+      
            print(response)
+      
            save_to_file(response, output_file)
+      
 
       - the frontend representation is under the folder optimize_code
- 3. Document customisation:
+ 4. Document customisation:
    - Iterative prompting is used for performing this task
    - the generate_text function under the call_openai_api_higher_tokens function is used for generating test using gpt_turbo_3.5 model based on the system prompt and user prompt
    - these prompts are given ib the code itself in the list 'messages'
@@ -105,36 +121,59 @@
 
    - 
    - #@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
+   - 
    def call_openai_api_higher_tokens(text, output_file):
-       def generate_text(messages):
-           response = openai.ChatCompletion.create(
-               model="gpt-3.5-turbo-16k",
-               messages=messages,
-               max_tokens=2000,
-               n=1,
-               stop=None,
-               temperature=0.5,
-           )
-           return response.choices[0].message['content']
-   
-       messages = [
-           {"role": "system", "content": "You are a smart technical writer who understands code and can write documentation for it."},
-           {"role": "user", "content": f"Give me a developers documentation of the following code. Give a brief intro, table of contents, function explanations, dependencies, API specs (if present), schema tables in markdown. Give in markdown format and try to strict to the headings\n\n: {text}."},
-       ]
-   
-       while True:
-           response = generate_text(messages)
-           print(response)
-   
-           feedback = input("Is there any more customisation you would like to add? (yes/no): ")
-           if feedback.lower() == "yes":
-               break
-           else:
-               refinement = input("How can I customise your documentation? ")
-               messages[1]["content"] += " " + refinement
 
+       def generate_text(messages):
+     
+           response = openai.ChatCompletion.create(
+     
+               model="gpt-3.5-turbo-16k",
+     
+               messages=messages,
+     
+               max_tokens=2000,
+     
+               n=1,
+     
+               stop=None,
+     
+               temperature=0.5,
+     
+           )
+     
+           return response.choices[0].message['content']
      
    
+       messages = [
+     
+           {"role": "system", "content": "You are a smart technical writer who understands code and can write documentation for it."},
+     
+           {"role": "user", "content": f"Give me a developers documentation of the following code. Give a brief intro, table of contents, function explanations, dependencies, API specs (if present), schema tables in markdown. Give in markdown format and try to strict to the headings\n\n: {text}."},
+     
+       ]
+     
+   
+       while True:
+     
+           response = generate_text(messages)
+     
+           print(response)
+     
+   
+           feedback = input("Is there any more customisation you would like to add? (yes/no): ")
+     
+           if feedback.lower() == "yes":
+     
+               break
+     
+           else:
+     
+               refinement = input("How can I customise your documentation? ")
+     
+               messages[1]["content"] += " " + refinement
+     
+
        save_to_file(response, output_file)
  4. Investigating clustering mechanisms:
     - The DBSCAN clustering algorithm was used for clustering the embeddings
@@ -155,41 +194,72 @@
 
      
      - from sklearn.cluster import DBSCAN
+     - 
       from sklearn.metrics import silhouette_score
+
       import numpy as np
+     
       
       #For hyperparameter tuning of eps and min_samples
+     
       def tune_dbscan(X, eps_range, min_samples_range):
+     
         best_score = -1
+     
         best_params = []
+     
         for eps in eps_range:
+     
           for min_samples in min_samples_range:
+     
             clustering = DBSCAN(eps=eps, min_samples=min_samples)
+     
             labels = clustering.fit_predict(X)
+     
             if len(set(labels)) > 1:  # Avoid single-cluster solutions
+     
               score = silhouette_score(X, labels)
+     
               if score > best_score:
+     
                 best_score = score
+     
                 best_params = [eps, min_samples]
+     
         return best_params
+     
           
       def clustering1(list1):
+     
           # Convert list1 to a numpy array if it's not already
+     
           X = np.array(list1)
+     
           eps_range = np.arange(10, 50, 5)
+     
           min_samples_range = range(10, 50)
+     
           tune_dbscan(X, eps_range, min_samples_range)
+     
           
           # DBSCAN parameters
+     
           dbscan = DBSCAN(eps=best_params[0], min_samples=best_params[1], metric='cosine').fit(X)
+     
           
           arr = dbscan.labels_
+     
           unique_values = np.unique(arr)
+     
           
           indices_list = []
+     
           for val in unique_values:
+     
               indices = np.where(arr == val)[0]
+     
               indices_list.append(indices)
+     
           
           return indices_list
 
