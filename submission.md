@@ -58,7 +58,7 @@
      - the seaborn library could also be used for the purpose of plotting the dendrograms in this case
      - either method could be used for plotting with no advantage over the other
      - the code is written in the file convert_embeddings.py:
-     - Z = hierarchy.linkage(list1, method='complete', metric='cosine') 
+     - Z = hierarchy.linkage(list1, method='complete', metric='cosine')
        plt.figure(figsize=(10, 6))
        hierarchy.dendrogram(Z)
        plt.title('Dendrogram')
@@ -74,15 +74,17 @@
       - the function is routed at the backend and is also represented in the frontend
       - another way to add this functionality would be to mention it in the user prompt of the code refactoring function and increase the number of tokens of the response
       - the code is written in the file infinite_gpt.py:
-      - def ask_gpt_to_optimize_code(prompt_text, output_folder):
+     
+      - 
+         def ask_gpt_to_optimize_code(prompt_text, output_folder):
        system_prompt = """You are a skilled software engineer specializing in code optimization and performance improvements."""
-
+   
        user_prompt = """Analyze the following code for performance bottlenecks and suggest optimizations to improve its efficiency. Provide only the optimized code and avoid any additional explanations or comments."""
-    
+       
        output_file = f'{output_folder}/optimized_code.txt'
-
+   
        print(SHOULD_MOCK_AI_RESPONSE)
-
+   
        if SHOULD_MOCK_AI_RESPONSE == 'True':
            print("Mocking AI response")
            mock_chunks_gpt(prompt_text, output_file)
@@ -91,6 +93,7 @@
            response = call_openai_api(prompt_text, system_prompt, user_prompt)
            print(response)
            save_to_file(response, output_file)
+
       - the frontend representation is under the folder optimize_code
  3. Document customisation:
    - Iterative prompting is used for performing this task
@@ -99,6 +102,8 @@
    - a while loop is used to carry out iterative prompting until the user is satisfied with the results of the documentation
    - the feedback variable takes in the input of any customisation the user wants to add to the documentation and calls the generate test function to customise the documentation accordingly
    - the code is written in the infinite_gpt.py file:
+
+   - 
    - #@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
    def call_openai_api_higher_tokens(text, output_file):
        def generate_text(messages):
@@ -127,6 +132,8 @@
            else:
                refinement = input("How can I customise your documentation? ")
                messages[1]["content"] += " " + refinement
+
+     
    
        save_to_file(response, output_file)
  4. Investigating clustering mechanisms:
@@ -145,6 +152,8 @@
     - senstivity to outliers
     - assumes all clusters to be spherical
     - the code for this is under a file called convert_embeddings2.py:
+
+     
      - from sklearn.cluster import DBSCAN
       from sklearn.metrics import silhouette_score
       import numpy as np
@@ -182,7 +191,9 @@
               indices = np.where(arr == val)[0]
               indices_list.append(indices)
           
-          return indices_list 
+          return indices_list
+
+      
 
 4. Suggesting improvements in the acrhitecture of the process:
    1.
