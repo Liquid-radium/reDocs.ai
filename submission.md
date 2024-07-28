@@ -58,7 +58,7 @@
      - the seaborn library could also be used for the purpose of plotting the dendrograms in this case
      - either method could be used for plotting with no advantage over the other
      - the code is written in the file convert_embeddings.py:
-       Z = hierarchy.linkage(list1, method='complete', metric='cosine') 
+     - Z = hierarchy.linkage(list1, method='complete', metric='cosine') 
        plt.figure(figsize=(10, 6))
        hierarchy.dendrogram(Z)
        plt.title('Dendrogram')
@@ -74,10 +74,10 @@
       - the function is routed at the backend and is also represented in the frontend
       - another way to add this functionality would be to mention it in the user prompt of the code refactoring function and increase the number of tokens of the response
       - the code is written in the file infinite_gpt.py:
-        def ask_gpt_to_optimize_code(prompt_text, output_folder):
+      - def ask_gpt_to_optimize_code(prompt_text, output_folder):
        system_prompt = """You are a skilled software engineer specializing in code optimization and performance improvements."""
 
-       user_prompt = """Analyze the following code for performance bottlenecks and suggest optimizations to improve its efficiency. Provide only the optimized            code and avoid any additional explanations or comments."""
+       user_prompt = """Analyze the following code for performance bottlenecks and suggest optimizations to improve its efficiency. Provide only the optimized code and avoid any additional explanations or comments."""
     
        output_file = f'{output_folder}/optimized_code.txt'
 
@@ -99,7 +99,7 @@
    - a while loop is used to carry out iterative prompting until the user is satisfied with the results of the documentation
    - the feedback variable takes in the input of any customisation the user wants to add to the documentation and calls the generate test function to customise the documentation accordingly
    - the code is written in the infinite_gpt.py file:
-     #@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
+   - #@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
    def call_openai_api_higher_tokens(text, output_file):
        def generate_text(messages):
            response = openai.ChatCompletion.create(
@@ -145,44 +145,44 @@
     - senstivity to outliers
     - assumes all clusters to be spherical
     - the code for this is under a file called convert_embeddings2.py:
-     from sklearn.cluster import DBSCAN
-   from sklearn.metrics import silhouette_score
-   import numpy as np
-   
-   #For hyperparameter tuning of eps and min_samples
-   def tune_dbscan(X, eps_range, min_samples_range):
-     best_score = -1
-     best_params = []
-     for eps in eps_range:
-       for min_samples in min_samples_range:
-         clustering = DBSCAN(eps=eps, min_samples=min_samples)
-         labels = clustering.fit_predict(X)
-         if len(set(labels)) > 1:  # Avoid single-cluster solutions
-           score = silhouette_score(X, labels)
-           if score > best_score:
-             best_score = score
-             best_params = [eps, min_samples]
-     return best_params
-       
-   def clustering1(list1):
-       # Convert list1 to a numpy array if it's not already
-       X = np.array(list1)
-       eps_range = np.arange(10, 50, 5)
-       min_samples_range = range(10, 50)
-       tune_dbscan(X, eps_range, min_samples_range)
-       
-       # DBSCAN parameters
-       dbscan = DBSCAN(eps=best_params[0], min_samples=best_params[1], metric='cosine').fit(X)
-       
-       arr = dbscan.labels_
-       unique_values = np.unique(arr)
-       
-       indices_list = []
-       for val in unique_values:
-           indices = np.where(arr == val)[0]
-           indices_list.append(indices)
-       
-       return indices_list 
+     - from sklearn.cluster import DBSCAN
+      from sklearn.metrics import silhouette_score
+      import numpy as np
+      
+      #For hyperparameter tuning of eps and min_samples
+      def tune_dbscan(X, eps_range, min_samples_range):
+        best_score = -1
+        best_params = []
+        for eps in eps_range:
+          for min_samples in min_samples_range:
+            clustering = DBSCAN(eps=eps, min_samples=min_samples)
+            labels = clustering.fit_predict(X)
+            if len(set(labels)) > 1:  # Avoid single-cluster solutions
+              score = silhouette_score(X, labels)
+              if score > best_score:
+                best_score = score
+                best_params = [eps, min_samples]
+        return best_params
+          
+      def clustering1(list1):
+          # Convert list1 to a numpy array if it's not already
+          X = np.array(list1)
+          eps_range = np.arange(10, 50, 5)
+          min_samples_range = range(10, 50)
+          tune_dbscan(X, eps_range, min_samples_range)
+          
+          # DBSCAN parameters
+          dbscan = DBSCAN(eps=best_params[0], min_samples=best_params[1], metric='cosine').fit(X)
+          
+          arr = dbscan.labels_
+          unique_values = np.unique(arr)
+          
+          indices_list = []
+          for val in unique_values:
+              indices = np.where(arr == val)[0]
+              indices_list.append(indices)
+          
+          return indices_list 
 
 4. Suggesting improvements in the acrhitecture of the process:
    1.
