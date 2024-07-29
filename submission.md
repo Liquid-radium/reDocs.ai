@@ -20,7 +20,7 @@
       - embeddings are created in the following manner: the codebase is cleaned up by removing characters, and tokenisation takes place, which are vectorised (converted into numbers which represent meaningful information about the word and are stored)
       - this is appended to the empty list code_for_gpt and embeddings respectively which can be used for further natural language processing tasks
       - the embeddings with maximum length is found out and the rest of the embeddings are padded for consistent input into a neural network, which in this case is GPT (improves effeciency). GPT makes use of transformer architecture, which is a special kind of neural network system.
-      - depending on whether the mock_response is true or false, OpenAI API is called, in which the system prompt and used prompts are given to the GPT
+      - depending on whether the mock_response is true or false, OpenAI API is called, in which the system prompt and user prompts are given to the GPT
       - the system prompt acts as the short statement which helps the GPT generate the required output based on the input prompt
     2. Code embeddings:
        - embeddings are created using BertTokenizer
