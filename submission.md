@@ -59,7 +59,7 @@
      - either method could be used for plotting with no advantage over the other
      - the code is written in the file convert_embeddings.py:
      - Z = hierarchy.linkage(list1, method='complete', metric='cosine')
-     - 
+        
        plt.figure(figsize=(10, 6))
        
        hierarchy.dendrogram(Z)
@@ -111,7 +111,7 @@
       
 
       - the frontend representation is under the folder optimize_code
- 4. Document customisation:
+ 3. Document customisation:
    - Iterative prompting is used for performing this task
    - the generate_text function under the call_openai_api_higher_tokens function is used for generating test using gpt_turbo_3.5 model based on the system prompt and user prompt
    - these prompts are given ib the code itself in the list 'messages'
@@ -121,7 +121,7 @@
 
    - 
    - #@backoff.on_exception(backoff.expo, openai.error.RateLimitError)
-   - 
+     
    def call_openai_api_higher_tokens(text, output_file):
 
        def generate_text(messages):
@@ -194,7 +194,7 @@
 
      
      - from sklearn.cluster import DBSCAN
-     - 
+      
       from sklearn.metrics import silhouette_score
 
       import numpy as np
@@ -265,12 +265,9 @@
 
       
 
-4. Suggesting improvements in the acrhitecture of the process:
-   1.
+4. Suggesting improvements in the process:
    - Instead of the BERTmodel for embeddings, a superior model called RoBERTa could have been used
    - It has the following advantages over the BERT model:
    - RoBERTa has a much larger training dataset than the BERT model which leads better learning of the model, thus improved accuracy
    - RoBERTa uses larger mini-batches and more training steps than BERT
-   - One of the BERT model's training objectives was next sentence prediction, which means that it would predict if two sentences are consecutive in a given paragraph, which when removed gives better accuracy.This was done in the RoBERTa model
-   2.  
-   - 
+   - One of the BERT model's training objectives was next sentence prediction, which means that it would predict if two sentences are consecutive in a given paragraph, which when removed gives better accuracy.This was done in the RoBERTa model 
