@@ -1,7 +1,11 @@
 1. Understanding of codebase:
+   
    Goal of project: automated documentation generation of a given codebase using GPT 3.5, FastAPI and the BERT model
+   
    Process: uploading a zip file of the codebase allows for the generation of the documentation of the codebase
+   
    Procedure by which the goal is achieved in brief (server):
+   
    1. creates a folder and extracts the zip file which is uploaded
    2. reads the file and traverses it using the breadth first search algorithm, and processing of files takes place using the BERT model and tokenizer
    3. embeddings are created during traversal and clustering is performed upon these embeddings
@@ -10,7 +14,7 @@
    6. routers are used for endpoint connections
    The client folder contains the code to implement these functions in the front end and display the end result 
 
-2. Explaining the machine learning aspects of algorithms used:
+3. Explaining the machine learning aspects of algorithms used:
    1. Codebase traversal:
       - the codebase is traversed, snippets and embeddings are extracted using the process_files function
       - embeddings are created in the following manner: the codebase is cleaned up by removing characters, and tokenisation takes place, which are vectorised (converted into numbers which represent meaningful information about the word and are stored)
@@ -49,7 +53,7 @@
        - test generation and evaluation allows to understand the shortcomings of the model and provides a method of evaluation of the model
        - another function is written which generates the documentation using system and user prompts, having a maximum response length of 2000 tokens.
 
-3. Tasks handled: 
+4. Tasks handled: 
   1. Dendrogram feature addition:
      - the linkage method from the heirarchy class was called to generate the dendrogram
      - the parameters passed were the list itself used for clustering, the metric of closeness, which was cosine as used in other areas of the codebase (during embeddings)
