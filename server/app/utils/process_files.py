@@ -1,12 +1,11 @@
-from transformers import BertTokenizer, BertModel
-
+from transformers import RobertaTokenizer, RobertaModel
 from logic.create_embeddings import embedding
 
 from logic.infinite_gpt import process_chunks
 
-model_name = 'bert-base-uncased'
-tokenizer = BertTokenizer.from_pretrained(model_name)
-model = BertModel.from_pretrained(model_name)
+model_name = 'roberta-base'
+tokenizer = RobertaTokenizer.from_pretrained(model_name)
+model = RobertaModel.from_pretrained(model_name)
 
 embedding_List = []
 
