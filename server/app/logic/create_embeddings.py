@@ -1,16 +1,15 @@
-from transformers import BertTokenizer, BertModel
+from transformers import RobertaTokenizer, RobertaModel
 import torch
 import numpy as np
-model_name = 'bert-base-uncased'
-tokenizer = BertTokenizer.from_pretrained(model_name)
-model = BertModel.from_pretrained(model_name)
+model_name = 'roberta-base'
+tokenizer = RobertaTokenizer.from_pretrained(model_name)
+model = RobertaModel.from_pretrained(model_name)
 
 
 def code(codes):
     code_tokens = tokenizer.tokenize(codes)
     tokens = [tokenizer.sep_token]+code_tokens+[tokenizer.sep_token]
-    tokens_ids = tokenizer.convert_tokens_to_ids(tokens)
-    context_embeddings = model(torch.tensor(tokens_ids)[None, :])[0]
+    context_embeddings = model(torch.tensor(tokens)[None, :])[0]
     return context_embeddings
 
 
