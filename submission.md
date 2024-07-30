@@ -194,7 +194,7 @@
     - specifying the number fo clusters
     - senstivity to outliers
     - assumes all clusters to be spherical
-    - the code for this is under a file called convert_embeddings2.py:
+    - the code for this is under a file called convert_embeddings2.py, and the function clustering1 can be called in the file traverse_files.py instead of the clustering function for different clustering mechanism:
 
      
      - from sklearn.cluster import DBSCAN
