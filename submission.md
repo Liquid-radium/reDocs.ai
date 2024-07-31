@@ -267,11 +267,55 @@
           
           return indices_list
 
-      
+    5. Investigating embedding mechanisms:
+       - RoBERTa, a better model as comapred to the BERT model, can be used to generate embeddings
+       - it has the following advantages:
+       - RoBERTa has a much larger training dataset than the BERT model which leads better learning of the model, thus improved accuracy
+       - RoBERTa uses larger mini-batches and more training steps than BERT
+       - One of the BERT model's training objectives was next sentence prediction, which means that it would predict if two sentences are consecutive in a given paragraph, which when removed gives better accuracy.This was done in the RoBERTa model
+       - For the model to be implemented, the model name and the tokeniser had to be changed to a roberta-base model ad tokeniser
+       - In the first function 'code', the conversion of the tokens generated from the uploaded codebase into ids had to be removed as this conversion is not necessary for using the roberta model
+       - these tokens are then coonverted into tensors and a function is called to return the embeddings
+       - this piece of code is mentioned in the file create_embeddings.py:
+       - from transformers import RobertaTokenizer, RobertaModel
+         
+         import torch
+       
+         import numpy as np
+         
+         model_name = 'roberta-base'
+         
+         tokenizer = RobertaTokenizer.from_pretrained(model_name)
+         
+         model = RobertaModel.from_pretrained(model_name)
+         
+         
+         
+         def code(codes):
+         
+             code_tokens = tokenizer.tokenize(codes)
+         
+             tokens = [tokenizer.sep_token]+code_tokens+[tokenizer.sep_token]
+         
+             context_embeddings = model(torch.tensor(tokens)[None, :])[0]
+         
+             return context_embeddings
+        - similarly, in the file process_files.py, the model name, tokeniser and the consequent details have to be changed to roberta-base
+        - the code is as follows:
+          from transformers import RobertaTokenizer, RobertaModel
+          
+          from logic.create_embeddings import embedding
+         
+         from logic.infinite_gpt import process_chunks
+         
+         model_name = 'roberta-base'
+       
+         tokenizer = RobertaTokenizer.from_pretrained(model_name)
+       
+         model = RobertaModel.from_pretrained(model_name)
+       
+
 
 4. Suggesting improvements in the process:
-   - Instead of the BERTmodel for embeddings, a superior model called RoBERTa could have been used
-   - It has the following advantages over the BERT model:
-   - RoBERTa has a much larger training dataset than the BERT model which leads better learning of the model, thus improved accuracy
-   - RoBERTa uses larger mini-batches and more training steps than BERT
-   - One of the BERT model's training objectives was next sentence prediction, which means that it would predict if two sentences are consecutive in a given paragraph, which when removed gives better accuracy.This was done in the RoBERTa model 
+   - Instead of the BERTmodel for embeddings, RoBERTa could have been used
+   
