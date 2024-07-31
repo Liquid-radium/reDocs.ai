@@ -267,7 +267,7 @@
           
           return indices_list
 
-    5. Investigating embedding mechanisms:
+ 5. Investigating embedding mechanisms:
        - RoBERTa, a better model as comapred to the BERT model, can be used to generate embeddings
        - it has the following advantages:
        - RoBERTa has a much larger training dataset than the BERT model which leads better learning of the model, thus improved accuracy
@@ -305,14 +305,14 @@
           from transformers import RobertaTokenizer, RobertaModel
           
           from logic.create_embeddings import embedding
-         
-         from logic.infinite_gpt import process_chunks
-         
-         model_name = 'roberta-base'
-       
-         tokenizer = RobertaTokenizer.from_pretrained(model_name)
-       
-         model = RobertaModel.from_pretrained(model_name)
+            
+          from logic.infinite_gpt import process_chunks
+            
+          model_name = 'roberta-base'
+          
+          tokenizer = RobertaTokenizer.from_pretrained(model_name)
+          
+           model = RobertaModel.from_pretrained(model_name)
        
 
 
