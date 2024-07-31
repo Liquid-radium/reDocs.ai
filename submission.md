@@ -21,11 +21,11 @@
       - this is appended to the empty list code_for_gpt and embeddings respectively which can be used for further natural language processing tasks
       - the embeddings with maximum length is found out and the rest of the embeddings are padded for consistent input into a neural network, which in this case is GPT (improves effeciency). GPT makes use of transformer architecture, which is a special kind of neural network system.
       - depending on whether the mock_response is true or false, OpenAI API is called, in which the system prompt and user prompts are given to the GPT
-      - the system prompt acts as the short statement which helps the GPT generate the required output based on the input prompt
+      - the system prompt acts as the short statement which helps the GPT generate the required output based on the given user prompt
     2. Code embeddings:
        - embeddings are created using BertTokenizer
        - tokens are created using the tokenize function and special tokens are added at the beginning and end of each token sequence for the following reasons: it marks the boundary for each sequence, and for attention mechanism (which is used in GPT) to anchor the embedding in place
-       - these token sequences are then converted into tensors using pytorch, which is a compatible format to feed into a neural network. This is then fed into a neural network based model which returns the embeddings needed
+       - these token sequences are then converted into token_ids, which is a required step while using the BERT model specefically. It is then converted into tensors using pytorch, which is a compatible format to feed into GPT. This is then fed into a neural network based model which returns the embeddings needed
        - the size and representation of the embeddings is handled using the embeddings function
     3. Handling large code files:
        - code refactoring helps handle large code files by enhancing the readability and retaining classes and functions which have higher significance in the overall block of code
@@ -36,8 +36,8 @@
        - these are fed into a softmax function which calculates the probability of the following word and its meaning/context with respect to the previous blocks of code
        - the decoder then has options of new words to choose from depending on the probabilities and the temperature of the attention block
     4. Maintaining context with agglomerative clustering:
-       - agglomerative clustering uses a bottom-up method of clustering which assumes all data point (code in this case) as single clusters, and combines them based on a metric of closeness (usually euclidean distance or cosine)
-       - this process continues until all data is fit under a cluster (agglomaertive clustering does hard assignment). Some advantages of this are as follows
+       - agglomerative clustering uses a bottom-up method of clustering which assumes all data point (code in this case) as single clusters, and combines them based on a metric of closeness (usually euclidean distance or cosine value) 
+       - this process continues until all data is fit under a cluster (agglomerative clustering does hard assignment). Some advantages of this are as follows
        - this is a method of unsupervised learning which increases effeciency of the transformer model in GPT while also reducing computation due to reduced features
        - clustering also helps in reducing overfitting, which is a common problem faced while making an accurate machine learning model
        - new features and context can be observed using the centroids or hierarchial information in the clusters by the transformers, which leads to higher accuracy
